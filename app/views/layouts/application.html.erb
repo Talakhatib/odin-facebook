@@ -7,10 +7,32 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
+    <%= javascript_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
+  <div class="container">
+  <header class="navbar navbar-fixed-top bg-info navbar-dark">
+   <div class="container">
+     <%= link_to "Facebook",root_path, id: "logo" %>
+     <nav>
+       <ul class="nav navbar-nav navbar-right">
+       <% if user_signed_in? %>
+        <li><%= link_to "Profil", user_path(current_user)  %></li>
+        <li><%= link_to "Edit", edit_user_registration_path  %></li>
+        <li><%= button_to "Logout",destroy_user_session_path,method: :delete, id: "logout-button" %></li>
+       <% else %>
+         <li><%= link_to "Home", root_path  %></li>
+         <li><%= link_to "Login" ,new_user_session_path %></li>
+        <%end%>
+       </ul>
+      </nav>
+    </div>
+  </header>
+   <% flash.each do |message_type, message| %>
+         <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
+    <% end %>
     <%= yield %>
   </body>
+
 </html>

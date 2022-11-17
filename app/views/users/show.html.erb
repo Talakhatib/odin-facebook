@@ -1,0 +1,16 @@
+<h2>Profile</h2>
+
+<div class="row">
+   <aside class="col-md-4">
+     <section class="user_info">
+       <h1>
+         <%= gravatar_for @user %>
+         <%= @user.name.titleize %>
+       </h1>
+      </section>
+      <ul>
+      <li><h4>Email: <%= @user.email %></h4></li>
+      <li><h4>Date Of Birth: <%= @user.date_of_birth %></h4></li>
+      </ul>
+    </aside>
+</div>
