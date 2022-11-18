@@ -1,0 +1,6 @@
+<li>
+  <%= comment.user.name.titleize %>: <%= comment.content %>
+  <% if current_user == comment.user %>
+    <%= button_to "Delete",comment,method: :delete %>
+  <% end %>
+</li>

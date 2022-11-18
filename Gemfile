@@ -76,3 +76,8 @@ gem "devise", "~> 4.8"
 gem 'bootstrap-sass', '3.4.1'
 gem 'webpacker'
 
+gem 'mail'
+
+gem 'active_storage_validations', '0.8.2'
+gem 'image_processing', '1.9.3'
+

@@ -8,9 +8,43 @@
          <%= @user.name.titleize %>
        </h1>
       </section>
+      <h4>Personal Information:</h4>
       <ul>
-      <li><h4>Email: <%= @user.email %></h4></li>
-      <li><h4>Date Of Birth: <%= @user.date_of_birth %></h4></li>
+      <li><h5>Email: <%= @user.email %></h5></li>
+      <li><h5>Date Of Birth: <%= @user.date_of_birth %></h5></li>
       </ul>
+      <br>
+      <h4>Add Post :</h4>
+      <%= form_with model:[@user,@user.posts.build],data: {turbo: false} do |f| %>
+
+       <%= f.label :content %><br>
+       <%= f.text_area :content %><br>
+
+       <span class="image">
+         <%= f.file_field :image %>
+       </span>
+       <br>
+       <%= f.submit "Add" %>
+      <% end %>
     </aside>
+      <div class="col-md-8">
+      <% if @user.posts.any?  %>
+         <h3> Posts(<%= @user.posts.count %>)</h3>
+            <ol class="posts">
+             <%= render @posts %>
+            </ol>
+      <% end %>
+      </div>
 </div>
+
+
+<%# checking the size of the image %>
+<script type="text/javascript">
+     $("#post_image").bind("change", function() {
+     const size_in_megabytes = this.files[0].size/1024/1024;
+      if (size_in_megabytes > 5) {
+        alert("Maximum file size is 5MB. Please choose a smaller file.");
+        $("#post_image").val("");
+        }
+    });
+</script>
