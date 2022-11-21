@@ -1,0 +1,43 @@
+<h3>Friend Request </h3>
+
+
+<ol>
+  <% @users.each do |user| %>
+    <% if current_user.from_friends.include?(user) && !current_user.current_friends.include?(user) %>
+    <% provide(:count,1) %>
+       <%= form_with url: friends_path, data: {turbo: false} do |f| %>
+        <%= hidden_field_tag :other_user ,user.id %>
+          <li><%= user.name.titleize %> 
+          <%= f.submit "Accept" %></li>
+       <% end %>
+    <% end %>
+  <% end %>
+</ol>
+
+
+<h3>Suggestions:</h3>
+<h5 style="color:red">(People you may know)</h5>
+  <ol>
+    <% @users.each do |user| %>
+    <% if !current_user.current_friends.include?(user) %>
+    <% if current_user.from_friends.include?(user) %>
+    <li style="color:green"><%= user.name.titleize %> send to you a friend request .</li>
+    <% else %>
+    <% if current_user.to_friends.include?(user)  %>
+         <li>
+           <p> <%= user.name.titleize  %>
+           <div style="color:purple"> Friend request was sent !</div> 
+           <%= button_to "Cancel Request", FriendRequest.find_by(from_user_id: current_user.id, to_user_id: user.id),method: :delete %> </p> 
+         </li>
+    <% else %>
+     <li>
+       <%= form_with url: friend_requests_path , data: {turbo: false} do |f| %>
+       <%= hidden_field_tag :to_user , user.id %>
+       <p> <%= user.name.titleize %> <%= f.submit "Friend Request" %></p>
+       <% end %>
+     </li>
+     <% end %>
+     <% end %>
+     <% end %>
+   <% end %>
+  </ol>

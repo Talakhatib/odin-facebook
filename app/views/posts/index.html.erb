@@ -1,5 +1,19 @@
 <h2>Facebook Posts</h2>
 
 <ol class="posts">
-    <%= render @posts %>
+
+ <% @friends.each do |friend| %>
+   <% @posts.each do |post| %>
+    <% if post.user_id == friend.other_user_id %>
+      <%= render post %>
+    <% end %>
+   <% end %>
+ <% end %>
+
+ <% @posts.each do |post| %>
+    <% if post.user_id == current_user.id %>
+      <%= render post %>
+    <% end %>
+ <% end %>
+
 </ol>

@@ -20,6 +20,9 @@
        <% if user_signed_in? %>
         <li><%= link_to "Profil", user_path(current_user)  %></li>
         <li><%= link_to "TimeLine", posts_path %></li>
+        <li><span class="badge badge-pill badge-primary" style="float:right;margin-bottom:-10px;"><%= yield(:count) %></span> 
+        <%= link_to "Friend Request" , friend_requests_path %></li>
+        <li><%= link_to "Friend List" , friends_path %></li>
         <li><%= link_to "Edit", edit_user_registration_path  %></li>
         <li><%= button_to "Logout",destroy_user_session_path,method: :delete, id: "logout-button" %></li>
        <% else %>

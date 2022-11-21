@@ -9,6 +9,10 @@ class ApplicationController < ActionController::Base
       stored_location_for(resource) || user_path(current_user)
     end
 
+#     def after_sign_up_path_for(resource)
+#      stored_location_for(resource) || user_path(new_user_session_path)
+#    end
+
     protected
 
          def configure_permitted_parameters
