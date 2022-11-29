@@ -81,3 +81,4 @@ gem 'mail'
 gem 'active_storage_validations', '0.8.2'
 gem 'image_processing', '1.9.3'
 
+gem 'faker'

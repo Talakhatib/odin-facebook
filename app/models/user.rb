@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  
+
   has_many :posts , foreign_key: :user_id, class_name:"Post", dependent: :destroy
   has_many :comments , foreign_key: :user_id, class_name:"Comment", dependent: :destroy
 
@@ -25,10 +25,14 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  validates :name, presence: true
+  validates :name, presence: true 
   validates :date_of_birth, presence: true
 
   def send_admin_mail
     UserMailer.welcome_email(self).deliver_now
+  end
+
+  def to_param
+    name
   end
 end
