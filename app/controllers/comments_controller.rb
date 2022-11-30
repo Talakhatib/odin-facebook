@@ -6,7 +6,7 @@ class CommentsController < ApplicationController
        @comment.user = @user
        @post = Post.find(params[:post_id])
        @comment.post = @post
-       if @comment.save!
+       if @comment.save
           flash[:success]="Added a comment "
           redirect_to posts_path
        end

@@ -6,7 +6,7 @@ class LikesController < ApplicationController
         @post = Post.find(params[:post_id])
         like.user = @user 
         like.post = @post 
-        if like.save! 
+        if like.save 
             redirect_to posts_path
         end
     end

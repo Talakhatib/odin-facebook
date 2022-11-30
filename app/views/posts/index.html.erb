@@ -1,29 +1,13 @@
 <h2>Facebook Posts</h2>
 <hr>
 <h4>Search for Posts:</h4>
-<%= form_tag filtering_path,:method=>"post" do %>
- <ul>
-   <li>Select the dates : <%= date_field_tag 'date_1'  %>   <%= date_field_tag 'date_2' %></li><br>
-   <li>Select user name: 
-   <select name="user_name">
-   <% @users.each do |user| %>
-     <option value="<%= user.id %>"><%= user.name%></option>
-   <% end %>
-   </select>
-   </li><br>
-   <li>Likes<span style="color:red">(you can enter one or if you enter both it means inbetween): </span>  
-   <%= label_tag 'more then:' %>
-   <%= text_field_tag 'x' %> 
-
-   <%= label_tag 'less then:' %>
-   <%= text_field_tag 'y' %>
-   </li><br>
-   <%= submit_tag("Search",:name => nil,class:"btn btn-primary") %>
-  </ul>
+<%= turbo_frame_tag "search" do %>
+   <h3><%= link_to "Search",search_path,class:"btn btn-info" %></h3>
 <% end %>
 
-<ol class="posts">
 
+<ol class="posts">
+<%= turbo_frame_tag "posts" do  %>
  <% @friends.each do |friend| %>
    <% @posts.each do |post| %>
     <% if post.user_id == friend.other_user_id %>
@@ -37,5 +21,5 @@
       <%= render post %>
     <% end %>
  <% end %>
-
+<% end %>
 </ol>

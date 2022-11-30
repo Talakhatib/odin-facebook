@@ -7,7 +7,7 @@ class FriendRequestsController < ApplicationController
     def create
         @friend = FriendRequest.new(from_user_id: current_user.id , to_user_id: params[:to_user] )
 
-        if @friend.save!
+        if @friend.save
             flash[:success] = "Friend Request in sent !"
             redirect_to friend_requests_path
         end

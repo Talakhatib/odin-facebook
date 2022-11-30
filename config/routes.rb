@@ -23,5 +23,6 @@ Rails.application.routes.draw do
   resources :friends 
 
   post '/filtering',to: 'posts#filtering'
+  get '/search', to: 'posts#search'
   
 end

@@ -1,0 +1,11 @@
+<%= turbo_stream.update "posts" do %>
+<h3><%= link_to "Back",posts_path,data: {turbo: false},class:"btn btn-danger" %></h3>
+ <% if @posts.any? %>
+   <% @posts.each do |post| %>
+      <%= render post %>
+    <% end %>
+ <% else %>
+ <hr>
+ <h1 style="color:red">No Result !</h1>
+ <% end %>
+<% end %>
